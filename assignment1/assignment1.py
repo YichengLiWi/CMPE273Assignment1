@@ -3,8 +3,8 @@ import subprocess
 
 app = Flask(__name__)
 id = 123456
-path1 = "/Users/yichengli/Desktop/python-Flask-test/"
-path = "../python-Flask-test/"
+path1 = "/Users/seanli/Downloads/cmpe273-fall17/assignment1/"
+path = "../assignment1"
 @app.route('/api/v1/scripts', methods=['POST'])
 def create_script():
     #print '123'
@@ -12,16 +12,16 @@ def create_script():
     # pyFile = request.form['data']
     # print pyFile
     global id
-    global path
-    request.files['data'].save(path + str(id) + '.py')
+    global path1
+    request.files['data'].save(path1 + str(id) + '.py')
     id+=1
     return jsonify({ 'script-id' : id }), 201
     # return '123'
 
 @app.route('/api/v1/scripts/<int:script_id>', methods = ['GET'])
 def show_post(script_id):
-    global path
-    scriptFile = path + str(script_id) + '.py'
+    global path1
+    scriptFile = path1 + str(script_id) + '.py'
     cmd = 'python ' + scriptFile
     print(cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
